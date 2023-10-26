@@ -39,7 +39,7 @@ public abstract class JsonUnbakedModelMixin implements JsonUnbakedModelMixed {
     private Map<String, Either<SpriteIdentifier, String>> originalTextureMap;
 
     @Inject(at = @At("TAIL"), method = "<init>")
-    public void collectOriginalTextureMap(@Nullable Identifier parentId, List<ModelElement> elements, Map<String, Either<SpriteIdentifier, String>> textureMap, Boolean ambientOcclusion, @Nullable JsonUnbakedModel.GuiLight guiLight, ModelTransformation transformations, List<ModelOverride> overrides, CallbackInfo ci) {
+    public void seasons$collectOriginalTextureMap(@Nullable Identifier parentId, List<ModelElement> elements, Map<String, Either<SpriteIdentifier, String>> textureMap, Boolean ambientOcclusion, @Nullable JsonUnbakedModel.GuiLight guiLight, ModelTransformation transformations, List<ModelOverride> overrides, CallbackInfo ci) {
         this.originalTextureMap = textureMap;
     }
 
@@ -49,12 +49,12 @@ public abstract class JsonUnbakedModelMixin implements JsonUnbakedModelMixed {
     }
 
     @Override
-    public void setSeasonalTextureMap(Map<Season, Map<String, Either<SpriteIdentifier, String>>> seasonalTextureMap) {
+    public void seasons$setSeasonalTextureMap(Map<Season, Map<String, Either<SpriteIdentifier, String>>> seasonalTextureMap) {
         this.seasonalTextureMap = seasonalTextureMap;
     }
 
     @Inject(at = @At("RETURN"), method = "bake(Lnet/minecraft/client/render/model/Baker;Lnet/minecraft/client/render/model/json/JsonUnbakedModel;Ljava/util/function/Function;Lnet/minecraft/client/render/model/ModelBakeSettings;Lnet/minecraft/util/Identifier;Z)Lnet/minecraft/client/render/model/BakedModel;")
-    public void collectSeasonalModels(Baker baker, JsonUnbakedModel parent, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings settings, Identifier id, boolean hasDepth, CallbackInfoReturnable<BakedModel> cir) {
+    public void seasons$collectSeasonalModels(Baker baker, JsonUnbakedModel parent, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings settings, Identifier id, boolean hasDepth, CallbackInfoReturnable<BakedModel> cir) {
         BakedModel originalModel = cir.getReturnValue();
         if(seasonalTextureMap != null && this.textureMap == this.originalTextureMap) {
             seasonalTextureMap.forEach((season, textureMap) -> {

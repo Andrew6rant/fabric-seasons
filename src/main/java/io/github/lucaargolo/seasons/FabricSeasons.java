@@ -7,7 +7,6 @@ import io.github.lucaargolo.seasons.commands.SeasonCommand;
 import io.github.lucaargolo.seasons.mixed.BiomeMixed;
 import io.github.lucaargolo.seasons.resources.CropConfigs;
 import io.github.lucaargolo.seasons.utils.*;
-import it.unimi.dsi.fastutil.longs.LongArraySet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
@@ -30,10 +29,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
@@ -332,10 +329,10 @@ public class FabricSeasons implements ModInitializer {
         if(!CONFIG.doTemperatureChanges(biomeId)) return;
 
         Biome.Weather currentWeather = biome.weather;
-        Biome.Weather originalWeather = ((BiomeMixed) (Object) biome).getOriginalWeather();
+        Biome.Weather originalWeather = ((BiomeMixed) (Object) biome).seasons$getOriginalWeather();
         if (originalWeather == null) {
             originalWeather = new Biome.Weather(currentWeather.hasPrecipitation(), currentWeather.temperature(), currentWeather.temperatureModifier(), currentWeather.downfall());
-            ((BiomeMixed) (Object) biome).setOriginalWeather(originalWeather);
+            ((BiomeMixed) (Object) biome).seasons$setOriginalWeather(originalWeather);
         }
         Season season = FabricSeasons.getCurrentSeason(world);
         boolean isJungle = entry.isIn(JUNGLE_LIKE_TAG);

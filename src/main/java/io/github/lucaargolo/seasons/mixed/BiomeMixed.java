@@ -4,9 +4,9 @@ import net.minecraft.world.biome.Biome;
 
 public interface BiomeMixed {
 
-    Biome.Weather getOriginalWeather();
+    Biome.Weather seasons$getOriginalWeather();
 
-    void setOriginalWeather(Biome.Weather originalWeather);
+    void seasons$setOriginalWeather(Biome.Weather originalWeather);
 
 
 }

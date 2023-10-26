@@ -38,7 +38,7 @@ public abstract class BiomeMixin implements BiomeMixed {
     @SuppressWarnings({"ConstantConditions", "removal", "OptionalAssignedToNull"})
     @Environment(EnvType.CLIENT)
     @Inject(at = @At("TAIL"), method = "getGrassColorAt", cancellable = true)
-    public void getSeasonGrassColor(double x, double z, CallbackInfoReturnable<Integer> cir) {
+    public void seasons$getSeasonGrassColor(double x, double z, CallbackInfoReturnable<Integer> cir) {
         Biome biome = (Biome) ((Object) this);
         Optional<Integer> overridedColor;
         if(ColorsCache.hasGrassCache(biome)) {
@@ -70,7 +70,7 @@ public abstract class BiomeMixin implements BiomeMixed {
     @SuppressWarnings({"ConstantConditions", "OptionalAssignedToNull"})
     @Environment(EnvType.CLIENT)
     @Inject(at = @At("TAIL"), method = "getFoliageColor", cancellable = true)
-    public void getSeasonFoliageColor(CallbackInfoReturnable<Integer> cir) {
+    public void seasons$getSeasonFoliageColor(CallbackInfoReturnable<Integer> cir) {
         Biome biome = (Biome) ((Object) this);
         Optional<Integer> overridedColor;
         if(ColorsCache.hasFoliageCache(biome)) {
@@ -95,7 +95,7 @@ public abstract class BiomeMixin implements BiomeMixed {
 
     @Environment(EnvType.CLIENT)
     @Inject(at = @At("HEAD"), method = "getDefaultFoliageColor", cancellable = true)
-    public void getSeasonDefaultFolliageColor(CallbackInfoReturnable<Integer> cir) {
+    public void seasons$getSeasonDefaultFolliageColor(CallbackInfoReturnable<Integer> cir) {
         if(this.originalWeather != null) {
             double originalTemperature = MathHelper.clamp(this.originalWeather.temperature(), 0.0F, 1.0F);
             double originalDownfall = MathHelper.clamp(this.originalWeather.downfall(), 0.0F, 1.0F);
@@ -109,7 +109,7 @@ public abstract class BiomeMixin implements BiomeMixed {
 
     @Environment(EnvType.CLIENT)
     @Inject(at = @At("HEAD"), method = "getDefaultGrassColor", cancellable = true)
-    public void getSeasonDefaultGrassColor(CallbackInfoReturnable<Integer> cir) {
+    public void seasons$getSeasonDefaultGrassColor(CallbackInfoReturnable<Integer> cir) {
         if(this.originalWeather != null) {
             double d = MathHelper.clamp(this.originalWeather.temperature(), 0.0F, 1.0F);
             double e = MathHelper.clamp(this.originalWeather.downfall(), 0.0F, 1.0F);
@@ -122,12 +122,12 @@ public abstract class BiomeMixin implements BiomeMixed {
     }
 
     @Override
-    public Biome.Weather getOriginalWeather() {
+    public Biome.Weather seasons$getOriginalWeather() {
         return this.originalWeather;
     }
 
     @Override
-    public void setOriginalWeather(Biome.Weather originalWeather) {
+    public void seasons$setOriginalWeather(Biome.Weather originalWeather) {
         this.originalWeather = originalWeather;
     }
 }

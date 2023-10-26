@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ItemModelsMixin {
 
     @Inject(at = @At("RETURN"), method = "getModel(Lnet/minecraft/item/Item;)Lnet/minecraft/client/render/model/BakedModel;", cancellable = true)
-    public void injectSeasonalModel(Item item, CallbackInfoReturnable<BakedModel> cir) {
+    public void seasons$injectSeasonalModel(Item item, CallbackInfoReturnable<BakedModel> cir) {
         BakedModel originalModel = cir.getReturnValue();
         Season season = FabricSeasons.getCurrentSeason();
         if(FabricSeasonsClient.originalToSeasonModelMap.containsKey(originalModel) && FabricSeasonsClient.originalToSeasonModelMap.get(originalModel).containsKey(season)) {

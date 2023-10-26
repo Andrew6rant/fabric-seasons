@@ -34,7 +34,7 @@ import static io.github.lucaargolo.seasons.FabricSeasons.MOD_NAME;
 public class ModelLoaderMixin {
 
     @Inject(at = @At("RETURN"), method = "loadModelFromJson", locals = LocalCapture.CAPTURE_FAILSOFT)
-    public void injectSeasonalModels(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) {
+    public void seasons$injectSeasonalModels(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) {
         MinecraftClient client = MinecraftClient.getInstance();
         Optional<Resource> optional = client.getResourceManager().getResource(new Identifier(id.getNamespace(), "seasons/models/" + id.getPath() + ".json"));
         if(optional.isPresent()) {
@@ -44,7 +44,7 @@ public class ModelLoaderMixin {
                 if (json.has("textures")) {
                     JsonObject textures = json.getAsJsonObject("textures");
                     JsonUnbakedModelMixed model = (JsonUnbakedModelMixed) cir.getReturnValue();
-                    model.setSeasonalTextureMap(new HashMap<>());
+                    model.seasons$setSeasonalTextureMap(new HashMap<>());
                     for (Season s : Season.values()) {
                         String code = s.name().toLowerCase(Locale.ROOT);
                         if (textures.has(code)) {

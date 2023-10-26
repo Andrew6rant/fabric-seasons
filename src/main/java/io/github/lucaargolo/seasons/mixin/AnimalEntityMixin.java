@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class AnimalEntityMixin {
 
     @Inject(at = @At("HEAD"), method = "breed", cancellable = true)
-    public void breedInject(ServerWorld serverWorld, AnimalEntity animalEntity, CallbackInfo info) {
+    public void seasons$breedInject(ServerWorld serverWorld, AnimalEntity animalEntity, CallbackInfo info) {
         if(FabricSeasons.getCurrentSeason(serverWorld) == Season.WINTER && !FabricSeasons.CONFIG.doAnimalsBreedInWinter()) {
             info.cancel();
         }

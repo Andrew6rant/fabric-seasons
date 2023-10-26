@@ -28,7 +28,7 @@ import java.util.List;
 public class ItemMixin {
 
     @Inject(at = @At("HEAD"), method = "appendTooltip")
-    public void appendTooltipInject(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
+    public void seasons$appendTooltipInject(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
         if(FabricSeasons.CONFIG.isSeasonMessingCrops()) {
             Season season = FabricSeasons.getCurrentSeason();
             Item item = stack.getItem();

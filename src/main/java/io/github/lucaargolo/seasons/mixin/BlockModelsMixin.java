@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BlockModelsMixin {
 
     @Inject(at = @At("RETURN"), method = "getModel", cancellable = true)
-    public void injectSeasonalModel(BlockState state, CallbackInfoReturnable<BakedModel> cir) {
+    public void seasons$injectSeasonalModel(BlockState state, CallbackInfoReturnable<BakedModel> cir) {
         BakedModel originalModel = cir.getReturnValue();
         Season season = FabricSeasons.getCurrentSeason();
         if(FabricSeasonsClient.originalToSeasonModelMap.containsKey(originalModel) && FabricSeasonsClient.originalToSeasonModelMap.get(originalModel).containsKey(season)) {

@@ -19,12 +19,12 @@ public abstract class VanillaFertilizablesMixin extends Block implements Fertili
     }
 
     @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
-    public void randomTickInject(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    public void seasons$randomTickInject(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         FertilizableUtil.randomTickInject(this, state, world, pos, random, ci);
     }
 
     @Inject(at = @At("HEAD"), method = "grow", cancellable = true)
-    public void growInject(ServerWorld world, Random random, BlockPos pos, BlockState state, CallbackInfo ci) {
+    public void seasons$growInject(ServerWorld world, Random random, BlockPos pos, BlockState state, CallbackInfo ci) {
         FertilizableUtil.growInject(this, world, random, pos, state, ci);
     }
 

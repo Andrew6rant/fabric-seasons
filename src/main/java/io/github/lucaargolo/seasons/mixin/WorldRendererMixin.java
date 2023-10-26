@@ -29,7 +29,7 @@ public abstract class WorldRendererMixin implements WorldRendererMixed {
     }
 
     @Override
-    public void reloadOnlyColors() {
+    public void seasons$reloadOnlyColors() {
         if (this.world == null || this.chunkBuilder == null) {
             return;
         }

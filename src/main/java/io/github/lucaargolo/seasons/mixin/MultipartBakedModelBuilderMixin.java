@@ -29,14 +29,14 @@ public class MultipartBakedModelBuilderMixin {
     private final HashSet<Season> validSeasonalComponents = new HashSet<>();
 
     @Inject(at = @At("TAIL"), method = "<init>")
-    public void createSeasonalComponentsMap(CallbackInfo ci) {
+    public void seasons$createSeasonalComponentsMap(CallbackInfo ci) {
         for(Season season : Season.values()) {
             seasonalComponentsMap.put(season, Lists.newArrayList());
         }
     }
 
     @Inject(at = @At("HEAD"), method = "addComponent")
-    public void addSeasonalComponent(Predicate<BlockState> predicate, BakedModel model, CallbackInfo ci) {
+    public void seasons$addSeasonalComponent(Predicate<BlockState> predicate, BakedModel model, CallbackInfo ci) {
         Map<Season, BakedModel> seasonModelMap = FabricSeasonsClient.originalToSeasonModelMap.get(model);
         if(seasonModelMap != null) {
             seasonModelMap.forEach((season, seasonalModel) -> {
@@ -51,7 +51,7 @@ public class MultipartBakedModelBuilderMixin {
     }
 
     @Inject(at = @At("RETURN"), method = "build")
-    public void addSeasonalMultipart(CallbackInfoReturnable<BakedModel> cir) {
+    public void seasons$addSeasonalMultipart(CallbackInfoReturnable<BakedModel> cir) {
         BakedModel bakedModel = cir.getReturnValue();
         Map<Season, BakedModel> seasonModelMap = new HashMap<>();
         seasonalComponentsMap.forEach((season, seasonalComponents) -> {

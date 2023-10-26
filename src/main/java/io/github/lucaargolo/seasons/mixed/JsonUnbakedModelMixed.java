@@ -9,5 +9,5 @@ import java.util.Map;
 public interface JsonUnbakedModelMixed {
 
     Map<Season, Map<String, Either<SpriteIdentifier, String>>> getSeasonalTextureMap();
-    void setSeasonalTextureMap(Map<Season, Map<String, Either<SpriteIdentifier, String>>> seasonalTextureMap);
+    void seasons$setSeasonalTextureMap(Map<Season, Map<String, Either<SpriteIdentifier, String>>> seasonalTextureMap);
 }
