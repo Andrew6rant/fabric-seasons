@@ -47,10 +47,9 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class FabricSeasons implements ModInitializer {
-
-    private static final LongArraySet temporaryMeltableCache = new LongArraySet();
     public static final String MOD_ID = "seasons";
     public static final String MOD_NAME = "Fabric Seasons";
 
@@ -122,7 +121,6 @@ public class FabricSeasons implements ModInitializer {
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             GreenhouseCache.tick(server);
-            temporaryMeltableCache.clear();
         });
 
         ServerPlayNetworking.registerGlobalReceiver(ASK_FOR_CONFIG, (server, player, handler, buf, responseSender) -> {
@@ -133,22 +131,6 @@ public class FabricSeasons implements ModInitializer {
         });
 
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new CropConfigs());
-    }
-
-    public static void setMeltable(BlockPos blockPos) {
-        temporaryMeltableCache.add(blockPos.asLong());
-    }
-
-    public static boolean isMeltable(BlockPos blockPos) {
-        return temporaryMeltableCache.contains(blockPos.asLong());
-    }
-
-    public static PlacedMeltablesState getPlacedMeltablesState(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(PlacedMeltablesState::createFromNbt, PlacedMeltablesState::new, "seasons_placed_meltables");
-    }
-
-    public static ReplacedMeltablesState getReplacedMeltablesState(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(ReplacedMeltablesState::createFromNbt, ReplacedMeltablesState::new, "seasons_replaced_meltables");
     }
 
     public static long getTimeToNextSeason(World world) {
@@ -376,19 +358,10 @@ public class FabricSeasons implements ModInitializer {
             }
         }else if(temp <= 0.1) {
             //Frozen Biomes
-            switch (season) {
-                case SUMMER -> {
-                    if (CONFIG.shouldSnowyBiomesMeltInSummer())
-                        return new Pair<>(hasPrecipitation, temp + 0.3f);
-                    else return new Pair<>(hasPrecipitation, temp);
-                }
-                case WINTER -> {
-                    return new Pair<>(hasPrecipitation, temp - 0.2f);
-                }
-                default -> {
-                    return new Pair<>(hasPrecipitation, temp);
-                }
+            if (Objects.requireNonNull(season) == Season.WINTER) {
+                return new Pair<>(hasPrecipitation, temp - 0.2f);
             }
+            return new Pair<>(hasPrecipitation, temp);
         }else if(temp <= 0.3) {
             //Cold Biomes
             switch (season) {

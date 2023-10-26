@@ -34,8 +34,6 @@ public class ItemMixin {
             Item item = stack.getItem();
             Block block = FabricSeasons.SEEDS_MAP.getOrDefault(item, null);
             if (block != null) {
-
-
                 MinecraftClient client = MinecraftClient.getInstance();
                 long handle = client.getWindow().getHandle();
                 KeyBinding sneakKey = client.options.sneakKey;

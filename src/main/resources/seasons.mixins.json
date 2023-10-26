@@ -4,14 +4,8 @@
   "package": "io.github.lucaargolo.seasons.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AbstractBlockMixin",
     "AnimalEntityMixin",
     "BiomeMixin",
-    "FreezeTopLayerFeatureMixin",
-    "IceBlockMixin",
-    "LakeFeatureMixin",
-    "ServerWorldMixin",
-    "SnowBlockMixin",
     "VanillaFertilizablesMixin",
     "WorldViewMixin"
   ],
