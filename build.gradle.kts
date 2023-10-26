@@ -83,7 +83,6 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project["fabric_version"]}")
 
     modRuntimeOnly("com.terraformersmc:modmenu:${project["modmenu_version"]}")
-    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${project["rei_version"]}")
 }
 
 configurations.all {
