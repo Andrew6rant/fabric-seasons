@@ -33,6 +33,7 @@ public abstract class WorldRendererMixin implements WorldRendererMixed {
         if (this.world == null || this.chunkBuilder == null) {
             return;
         }
+        ColorsCache.clearCache();
         this.world.reloadColor();
 
         for (WorldRenderer.ChunkInfo chunkInfo : this.chunkInfos) {

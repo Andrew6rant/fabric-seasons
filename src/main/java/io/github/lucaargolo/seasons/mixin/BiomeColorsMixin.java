@@ -18,6 +18,7 @@ public class BiomeColorsMixin {
     @SuppressWarnings({"ConstantValue", "removal"})
     @Inject(at = @At("RETURN"), method = "method_23791", cancellable = true)
     private static void seasons$enhanceFallColors(Biome biome, double x, double z, CallbackInfoReturnable<Integer> cir) {
+        //if (true) return;
         Season season = FabricSeasons.getCurrentSeason();
         if(season == Season.FALL && ((Object) biome) instanceof BiomeMixed mixed && mixed.seasons$getOriginalWeather() != null) {
             double d = MathHelper.clamp(mixed.seasons$getOriginalWeather().temperature(), 0.0F, 1.0F);

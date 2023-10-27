@@ -156,6 +156,14 @@ public class FabricSeasons implements ModInitializer {
         return Long.MAX_VALUE;
     }
 
+    public static float getPercentageToNextSeason(World world) {
+        return getPercentageToNextSeason(world, false);
+    }
+
+    public static float getPercentageToNextSeason(World world, boolean ignoreDimension) {
+        return getTimeToNextSeason(world, ignoreDimension)/((float)getCurrentSeason(world, ignoreDimension).getSeasonLength());
+    }
+
     public static Season getNextSeason(World world) {
         return getNextSeason(world, false);
     }

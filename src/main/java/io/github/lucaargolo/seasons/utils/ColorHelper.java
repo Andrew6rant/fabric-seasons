@@ -42,4 +42,16 @@ public class ColorHelper {
         return color;
     }
 
+    // modified from https://stackoverflow.com/questions/2630925/whats-the-most-effective-way-to-interpolate-between-two-colors-pseudocode-and
+    public static int mixHexColors(int startColor, int endColor, float lerp) {
+        int mask1 = 0xff00ff00;
+        int mask2 = 0x00ff00ff;
+
+        int roundedLerp = (int)(256 * lerp);
+        int roundedDifference = 256 - roundedLerp;
+
+        return (((((startColor & mask1) * roundedDifference) + ((endColor & mask1) * roundedLerp)) >> 8) & mask1)
+                | (((((startColor & mask2) * roundedDifference) + ((endColor & mask2) * roundedLerp)) >> 8) & mask2);
+    }
+
 }

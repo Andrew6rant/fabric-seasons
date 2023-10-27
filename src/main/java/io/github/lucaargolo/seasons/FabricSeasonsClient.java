@@ -25,6 +25,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
@@ -59,6 +60,10 @@ public class FabricSeasonsClient implements ClientModInitializer {
         });
 
         ClientTickEvents.END_WORLD_TICK.register((clientWorld) -> {
+            if (clientWorld.getTime() % 4L == 0L) { // just for testing right now, will be a config later
+                //System.out.println("current:"+getCurrentSeason(clientWorld)+", next:"+getNextSeason(clientWorld)+", time:"+getTimeToNextSeason(clientWorld)+", length:"+getCurrentSeason(clientWorld).getSeasonLength()+", "+getPercentageToNextSeason(clientWorld));
+                ((WorldRendererMixed)(MinecraftClient.getInstance().worldRenderer)).seasons$reloadOnlyColors();
+            }
             if(FabricSeasons.getCurrentSeason(clientWorld) != lastRenderedSeasonMap.get(clientWorld.getRegistryKey())) {
                 lastRenderedSeasonMap.put(clientWorld.getRegistryKey(), FabricSeasons.getCurrentSeason(clientWorld));
                 ((WorldRendererMixed)(MinecraftClient.getInstance().worldRenderer)).seasons$reloadOnlyColors();
